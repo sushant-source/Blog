@@ -1,14 +1,19 @@
 package com.sushant.services.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.sushant.entites.User;
 import com.sushant.payloads.UserDto;
 import com.sushant.repositories.UserRepo;
 import com.sushant.services.UserService;
+import com.sushant.exceptions.ResourceNotFoundException;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -24,26 +29,46 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto updateUser(UserDto user) {
+	public UserDto updateUser(UserDto userDto, Integer userId) {
 
-		return null;
+		User user = this.userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+
+		user.setName(userDto.getName());
+		user.setEmail(userDto.getEmail());
+		user.setAbout(userDto.getAbout());
+		user.setPassword(userDto.getPassword());
+
+		User updateUser = this.userRepo.save(user);
+		UserDto userToDto1 = this.userToDto(updateUser);
+
+		return userToDto1;
 	}
 
 	@Override
 	public UserDto getUserById(Integer userId) {
 
-		return null;
+		User user = this.userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+
+		return this.userToDto(user);
 	}
 
 	@Override
 	public List<UserDto> getAllUsers() {
 
-		return null;
+		List<User> users = this.userRepo.findAll();
+	
+		List<UserDto> userDtos = users.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
+		return userDtos;
 	}
 
 	@Override
 	public void deleteUser(Integer userId) {
 
+		User user = userRepo.findById(userId)
+				.orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
+		this.userRepo.delete(user);
 	}
 
 	public User dtoToUser(UserDto userDto) {
