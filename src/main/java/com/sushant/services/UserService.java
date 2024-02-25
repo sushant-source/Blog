@@ -8,11 +8,13 @@ public interface UserService {
 
 	UserDto createUser(UserDto user);
 
-	UserDto updateUser(UserDto user);
+	UserDto updateUser(UserDto user, Integer uid);
 
 	UserDto getUserById(Integer userId);
 
 	List<UserDto> getAllUsers();
 
 	void deleteUser(Integer userId);
+
+
 }
