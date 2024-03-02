@@ -1,19 +1,15 @@
 package com.sushant.exceptions;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class ResourceNotFoundException extends RuntimeException {
 
 	String resourceName;
 	String fieldName;
 	long fieldValue;
 	public ResourceNotFoundException(String resourceName, String fieldName, long fieldValue) {
-		super(String.format("%s not found with %s : %1", resourceName, fieldName, fieldValue));
+		super(String.format("%s not found with %s : %s", resourceName, fieldName, fieldValue));
 		this.resourceName = resourceName;
 		this.fieldName = fieldName;
 		this.fieldValue = fieldValue;
