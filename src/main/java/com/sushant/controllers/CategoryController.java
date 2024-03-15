@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sushant.payloads.ApiResponse;
 import com.sushant.payloads.CategoryDto;
-import com.sushant.payloads.UserDto;
 import com.sushant.services.CategoryService;
 
 import jakarta.validation.Valid;
