@@ -36,6 +36,8 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	//                                                    Create Post
+	
 	@Override
 	public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
 
@@ -54,6 +56,8 @@ public class PostServiceImpl implements PostService {
 
 		return this.modelMapper.map(newPost, PostDto.class);
 	}
+	
+	//                                                       Update Post
 
 	@Override
 	public PostDto updatePost(PostDto postDto, Integer postId) {
@@ -67,6 +71,8 @@ public class PostServiceImpl implements PostService {
 		return this.modelMapper.map(updatedPost, PostDto.class);
 	}
 
+	//                                                       Delete Post
+	
 	@Override
 	public void deletePost(Integer postId) {
 
@@ -75,12 +81,16 @@ public class PostServiceImpl implements PostService {
 		this.postRepo.delete(post);
 	}
 
+	//                                                       Get Post By Id
+	
 	@Override
 	public PostDto getPostById(Integer postId) {
 		Post post = this.postRepo.findById(postId)
 				.orElseThrow(() -> new ResourceNotFoundException("Post", "Post Id", postId));
 		return this.modelMapper.map(post, PostDto.class);
 	}
+	
+	//                                                      Get All Post
 
 	@Override
 	public List<PostDto> getAllPost(Integer pageNumber, Integer pageSize) {
@@ -97,6 +107,8 @@ public class PostServiceImpl implements PostService {
 
 		return postDtos;
 	}
+	
+	//                                                    Get Post By User
 
 	@Override
 	public List<PostDto> getPostByUser(Integer userId) {
@@ -110,6 +122,8 @@ public class PostServiceImpl implements PostService {
 		return postDtos;
 	}
 
+	//                                                    Get Post By Category
+	
 	@Override
 	public List<PostDto> getPostByCategory(Integer categoryId) {
 
@@ -121,6 +135,8 @@ public class PostServiceImpl implements PostService {
 				.collect(Collectors.toList());
 		return postDtos;
 	}
+	
+	//                                                     Search Posts
 
 	@Override
 	public List<PostDto> searchPosts(String keyword) {

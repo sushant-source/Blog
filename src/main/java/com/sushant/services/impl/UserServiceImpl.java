@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private  ModelMapper modelMapper;
 
+	//                                                          Create User
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
 		return this.userToDto(savedUser);
 	}
 
+	//                                                         Update User
+	
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) {
 
@@ -47,6 +51,8 @@ public class UserServiceImpl implements UserService {
 
 		return userToDto1;
 	}
+	
+	//                                                          Get User By Id
 
 	@Override
 	public UserDto getUserById(Integer userId) {
@@ -57,6 +63,8 @@ public class UserServiceImpl implements UserService {
 		return this.userToDto(user);
 	}
 
+	//                                                         Get All Users
+	
 	@Override
 	public List<UserDto> getAllUsers() {
 
@@ -66,6 +74,8 @@ public class UserServiceImpl implements UserService {
 		return userDtos;
 	}
 
+	//                                                         Delete User
+	
 	@Override
 	public void deleteUser(Integer userId) {
 
@@ -73,11 +83,15 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));
 		this.userRepo.delete(user);
 	}
+	
+	//                                                          dtoToUser
 
 	public User dtoToUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
 		return user;
 	}
+	
+	//                                                          userToDto
 
 	public UserDto userToDto(User user) {
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
