@@ -6,15 +6,24 @@ import com.sushant.payloads.UserDto;
 
 public interface UserService {
 
+	//                                                              Create User
+
 	UserDto createUser(UserDto user);
+
+   //                                                               Update User
 
 	UserDto updateUser(UserDto user, Integer uid);
 
+   //	                                                            Get User By Id
+
 	UserDto getUserById(Integer userId);
 
+	//                                                              Get All Users
+	
 	List<UserDto> getAllUsers();
 
-	void deleteUser(Integer userId);
+	//                                                               Delete User
 
+	void deleteUser(Integer userId);
 
 }
