@@ -25,7 +25,7 @@ public interface PostService {
 	
 	//                                                      Get All Post
 	
-	PostResponse getAllPost(Integer pageNumber, Integer pageSize);
+	PostResponse getAllPost(Integer pageNumber, Integer pageSize, String sortBy);
 	
 	//                                                      Get Post By User
 	
