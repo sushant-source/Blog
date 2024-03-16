@@ -26,6 +26,9 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 	
+	
+	//                                          CREATE POST
+	
 	@PostMapping("/user/{userId}/category/{categoryId}/posts")
 	public ResponseEntity<PostDto> createPost(
 			@RequestBody PostDto postDto,
@@ -36,17 +39,26 @@ public class PostController {
 		return new ResponseEntity<PostDto>(createPost, HttpStatus.CREATED);
 	}
 	
+	
+	//                                      GET POST BY USER ID
+	
 	@GetMapping("/user/{userId}/posts")
 	public ResponseEntity<List<PostDto>> getPostsByUser(@PathVariable Integer userId) {
 		List<PostDto> posts = this.postService.getPostByUser(userId);
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
 	}
+	
+	
+	//                                      GET POST BY CATEGORY ID
 
 	@GetMapping("/category/{categoryId}/posts")
 	public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Integer categoryId) {
 		List<PostDto> posts = this.postService.getPostByCategory(categoryId);
 		return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
 	}
+	
+	
+	//                                       GET ALL POST
 	
 	@GetMapping("/posts")
 	public ResponseEntity<List<PostDto>> getAllPost(
@@ -57,17 +69,26 @@ public class PostController {
 		return new ResponseEntity<List<PostDto>>(allPost, HttpStatus.OK);
 		}
 	
+	
+	//                                       GET POST BY ID      
+	
 	@GetMapping("/posts/{postId}")
 	public ResponseEntity<PostDto> getPostById(@PathVariable Integer postId){
 		PostDto postDto = this.postService.getPostById(postId);
 		return new ResponseEntity<PostDto>(postDto, HttpStatus.OK);
 	}
 	
+	
+	//                                         DELETE POST
+	
 	@DeleteMapping("/posts/{postId}")
 	public ApiResponse deletePost(@PathVariable Integer postId) {
 		this.postService.deletePost(postId);
 		return new ApiResponse("Post is deleted suscessfully", true);
 	}
+	
+	
+	//                                         UPDATE POST
 	
 	@PutMapping("/posts/{postId}")
 	public ResponseEntity<PostDto>updatePost(@RequestBody PostDto postDto, @PathVariable Integer postId){
