@@ -3,6 +3,7 @@ package com.sushant.services;
 import java.util.List;
 
 import com.sushant.payloads.PostDto;
+import com.sushant.payloads.PostResponse;
 
 public interface PostService {
 	
@@ -24,7 +25,7 @@ public interface PostService {
 	
 	//                                                      Get All Post
 	
-	List<PostDto> getAllPost(Integer pageNumber, Integer pageSize);
+	PostResponse getAllPost(Integer pageNumber, Integer pageSize);
 	
 	//                                                      Get Post By User
 	

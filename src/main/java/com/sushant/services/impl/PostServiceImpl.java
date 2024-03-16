@@ -16,6 +16,7 @@ import com.sushant.entites.Post;
 import com.sushant.entites.User;
 import com.sushant.exceptions.ResourceNotFoundException;
 import com.sushant.payloads.PostDto;
+import com.sushant.payloads.PostResponse;
 import com.sushant.repositories.CategoryRepo;
 import com.sushant.repositories.PostRepo;
 import com.sushant.repositories.UserRepo;
@@ -93,7 +94,7 @@ public class PostServiceImpl implements PostService {
 	//                                                      Get All Post
 
 	@Override
-	public List<PostDto> getAllPost(Integer pageNumber, Integer pageSize) {
+	public PostResponse getAllPost(Integer pageNumber, Integer pageSize) {
 		
 		Pageable p = PageRequest.of(pageNumber, pageSize);
 		
@@ -104,8 +105,18 @@ public class PostServiceImpl implements PostService {
 		
 		List<PostDto> postDtos = allPosts.stream().map((post) -> this.modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
+		
+		PostResponse postResponse = new PostResponse();
+		
+		postResponse.setContent(postDtos);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalElement(pagePost.getTotalElements());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setLastPage(pagePost.isLast());
+		
 
-		return postDtos;
+		return postResponse;
 	}
 	
 	//                                                    Get Post By User
