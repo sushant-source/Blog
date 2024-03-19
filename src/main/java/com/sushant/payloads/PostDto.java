@@ -1,6 +1,10 @@
 package com.sushant.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.sushant.entites.Comment;
 
 import lombok.Data;
 
@@ -20,4 +24,6 @@ public class PostDto {
 	private UserDto user;
 	
 	private CategoryDto category;
+	
+	private Set<CommentDto> comments = new HashSet<>();
 }
