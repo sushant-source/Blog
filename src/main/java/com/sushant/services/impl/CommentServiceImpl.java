@@ -40,9 +40,9 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void deleteComment(Integer commentId) {
 
-		Comment comment = this.commentRepo.findById(commentId)
+		Comment com = this.commentRepo.findById(commentId)
 				.orElseThrow(()-> new ResourceNotFoundException("Comment", "Comment Id", commentId));
-		this.commentRepo.delete(comment);
+		this.commentRepo.delete(com);
 	}
 
 }
